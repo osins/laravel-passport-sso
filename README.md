@@ -1,6 +1,6 @@
 # laravel-passport-sso
 This is Single Sign-On for Laravel 7.30
-
+```
 composer create-project --prefer-dist laravel/laravel:^7.0 sso
 cd sso
 composer require laravel/ui:^2.0
@@ -13,3 +13,4 @@ sed -i "s/'driver' => 'token',/'driver' => 'passport',/g" config/auth.php
 # php artisan migrate
 # php artisan passport:install
 # php artisan passport:keys 
+```
