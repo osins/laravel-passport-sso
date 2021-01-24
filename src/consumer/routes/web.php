@@ -19,13 +19,13 @@ Route::get('/', function () {
 
 Route::group(['prefix' => '/sso'], function () {
     Route::group(['prefix' => '/passport'], function () {
-        Route::get('/', 'App\Http\Controllers\Controller@redirect')->name('redirect');
-        Route::get('/callback', 'App\Http\Controllers\Controller@callback')->name('callback');
-        Route::get('/user', 'App\Http\Controllers\Controller@getUser')->name('getUser');
+        Route::get('/', 'App\Http\Controllers\SsoController@redirect')->name('redirect');
+        Route::get('/callback', 'App\Http\Controllers\SsoController@callback')->name('callback');
+        Route::get('/user', 'App\Http\Controllers\SsoController@getUser')->name('getUser');
     });
 
     Route::group(['prefix' => 'github'], function () {
-        Route::get('/', 'App\Http\Controllers\Controller@redirect')->name('redirect');
-        Route::get('/callback', 'App\Http\Controllers\Controller@callback')->name('callback');
+        Route::get('/', 'App\Http\Controllers\GithubController@redirect')->name('redirect');
+        Route::get('/callback', 'App\Http\Controllers\GithubController@callback')->name('callback');
     });
 });
