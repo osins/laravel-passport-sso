@@ -13,9 +13,7 @@ http://sso:8080/login
 ```
 
 sso init:
-```
-https://laravel.com/docs/7.x/passport
-```
+[Installation & Basic Usage](https://laravel.com/docs/7.x/passport)
 
 bash:
 ```
@@ -34,6 +32,4 @@ sed -i "s/'driver' => 'token',/'driver' => 'passport',/g" config/auth.php
 ```
 
 consumer init:
-```
-[composer require socialiteproviders/laravelpassport](https://socialiteproviders.com/Laravel-Passport/#installation-basic-usage)
-```
+[Installation & Basic Usage](https://socialiteproviders.com/Laravel-Passport/#installation-basic-usage)
