@@ -1,0 +1,87 @@
+version: "3.8"
+services:
+  nginx:
+    image: nginx
+    ports:
+      - 8080:8080
+      - 8081:8081
+    depends_on:
+      - php7.2
+      - php7.4
+    networks:
+      sso_net:
+        ipv4_address: 192.168.1.2
+    working_dir: /var/www
+    volumes:
+      - ./.docker/conf/nginx:/etc/nginx/conf.d
+      - ./src:/var/www
+
+  php7.2:
+    image: wangsying/php:7.2.5-fpm-stretch
+    # environment:
+    #   http_proxy: "http://192.168.50.2:1080"
+    #   https_proxy: "http://192.168.50.2:1080"
+    extra_hosts:
+      - consumer:192.168.1.2
+    networks:
+      sso_net:
+        ipv4_address: 192.168.1.5
+    working_dir: /var/www/sso
+    volumes:
+      # - ./.docker/log/php:/var/log/php
+      - ./.docker/conf/php/php.ini:/usr/local/etc/php/php.ini
+      - ./src:/var/www
+
+  php7.4:
+    image: wangsying/php:7.4.14-fpm-buster
+    # environment:
+    #   http_proxy: "http://192.168.50.2:1080"
+    #   https_proxy: "http://192.168.50.2:1080"
+    extra_hosts:
+      - sso:192.168.1.2
+    networks:
+      sso_net:
+        ipv4_address: 192.168.1.6
+    working_dir: /var/www/consumer
+    volumes:
+      # - ./.docker/log/php:/var/log/php
+      - ./.docker/conf/php/php.ini:/usr/local/etc/php/php.ini
+      - ./src:/var/www
+
+  mysql:
+    image: mysql:5.7
+    hostname: mysql
+    ports:
+      - 33062:3306
+    networks:
+      sso_net:
+        ipv4_address: 192.168.1.91
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    command: "--innodb_use_native_aio=0"
+    volumes:
+      - ./.data/mysql:/var/lib/mysql
+
+  redis:
+    image: redis
+    hostname: redis
+    networks:
+      sso_net:
+        ipv4_address: 192.168.1.92
+
+  memcached:
+    image: memcached
+    hostname: memcached
+    networks:
+      sso_net:
+        ipv4_address: 192.168.1.93
+
+networks:
+  sso_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.1.0/24"

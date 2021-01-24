@@ -1,24 +1,4 @@
-# laravel-passport-sso
-This is Single Sign-On for Laravel 7.30
-
-host config:
-```
-127.0.0.1 sso consumer
-```
-
-url:
-```
-http://consumer:8081/sso/passport
-http://sso:8080/login
-```
-
-sso init:
-```
-https://laravel.com/docs/7.x/passport
-```
-
-bash:
-```
+#!/bin/bash
 composer create-project --prefer-dist laravel/laravel:^7.0 sso
 cd sso
 composer require laravel/ui:^2.0
@@ -31,9 +11,4 @@ sed -i "s/'driver' => 'token',/'driver' => 'passport',/g" config/auth.php
 # php artisan migrate
 # php artisan passport:install
 # php artisan passport:keys 
-```
 
-consumer init:
-```
-[composer require socialiteproviders/laravelpassport](https://socialiteproviders.com/Laravel-Passport/#installation-basic-usage)
-```
