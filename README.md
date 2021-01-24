@@ -1,2 +1,15 @@
 # laravel-passport-sso
 This is Single Sign-On for Laravel 7.30
+
+composer create-project --prefer-dist laravel/laravel:^7.0 sso
+cd sso
+composer require laravel/ui:^2.0
+php artisan ui bootstrap --auth
+composer require laravel/passport:^9.0
+sed -i 's/use Notifiable;/use \Laravel\\Passport\\HasApiTokens, Notifiable;/g' app/User.php
+sed -i "s/\/\/ 'App\\\\Model'/'App\\\\Model'/g" app/Providers/AuthServiceProvider.php
+sed -i "s/\/\//\\\\Laravel\\\\Passport\\\\Passport::routes\(\);/g" app/Providers/AuthServiceProvider.php
+sed -i "s/'driver' => 'token',/'driver' => 'passport',/g" config/auth.php
+# php artisan migrate
+# php artisan passport:install
+# php artisan passport:keys 
