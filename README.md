@@ -1,7 +1,7 @@
 # laravel-passport-sso
 This is Single Sign-On for Laravel 7.30
 
-host config:
+your local host config:
 ```
 127.0.0.1 sso consumer
 ```
