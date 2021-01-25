@@ -6,6 +6,16 @@ host config:
 127.0.0.1 sso consumer
 ```
 
+boot project:
+```
+docker-compose up -d
+```
+
+stop project:
+```
+docker-compose down
+```
+
 url:
 ```
 http://consumer:8081/sso/passport
